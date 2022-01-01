@@ -2,35 +2,47 @@ const express = require('express');
 const app = express();
 const PORT = '3000';
 const mongoose = require('mongoose');
+const linkRoute = require('./routes/linkRoute');
 let args = process.argv.slice(2);
 
-const personSchema = new mongoose.Schema({
-  name: { type: 'string', required: true },
-  age: { type: 'number', required: true },
-  dickSize: String,
-});
+const Person = require('./models/Person');
 
-const Person = mongoose.model('Person', personSchema);
+// let person = new Person({
+//   name: args[0],
+//   age: args[1],
+//   dickSize: args[2],
+// });
 
-let person = new Person({
-  name: args[0],
-  age: args[1],
-  dickSize: args[2],
-});
+// person
+//   .save()
+//   .then((doc) => {
+//     console.log(doc);
+//   })
+//   .catch((err) => {
+//     console.log(err);
+//   });
 
-person
-  .save()
-  .then((doc) => {
-    console.log(doc);
-  })
-  .catch((err) => {
-    console.log(err);
-  });
+// let link = new Link({
+//   title: 'Twitter',
+//   description: 'Esse é meu twitter',
+//   url: 'https://twitter.com/Reflixzinhu',
+// });
+
+// link
+//   .save()
+//   .then((doc) => {
+//     console.log(doc);
+//   })
+//   .catch((err) => {
+//     console.log(err);
+//   });
 
 mongoose.connect('mongodb://localhost/blog', (err, db) => {
-  console.log(err);
+  console.log(err, db);
   //   console.log(db);
 });
+
+app.use('/links', linkRoute);
 
 app.get('/', (req, res) => {
   res.send('Hello World');
