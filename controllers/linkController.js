@@ -30,9 +30,9 @@ const addLink = async (req, res) => {
 
   try {
     let doc = await link.save();
-    res.send(doc);
+    res.send('Link Adicionado com Sucesso!');
   } catch (err) {
-    console.log(err);
+    res.render('add', { err, body: req.body });
   }
 };
 

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>Document</h1>
+    <form action="/links/new" method="post">
+      <input
+        class="field"
+        name="title"
+        placeholder="Title"
+        required
+        value="<%=body.title%>"
+      />
+      <input
+        class="field"
+        name="description"
+        placeholder="Description"
+        required
+        value="<%=body.description%>"
+      />
+      <input
+        class="field"
+        name="url"
+        placeholder="URL"
+        required
+        value="<%=body.url%>"
+      />
+      <button>Save</button>
+      <% if(err){ %>
+      <h3><%=err.message %></h3>
+      <% } %>
+    </form>
+  </body>
+</html>
