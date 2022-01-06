@@ -9,7 +9,7 @@ let args = process.argv.slice(2);
 const Person = require('./models/Person');
 
 mongoose.connect('mongodb://localhost/blog', (err, db) => {
-  console.log(err, db);
+  // console.log(err, db);
 });
 
 app.set('view engine', 'ejs');

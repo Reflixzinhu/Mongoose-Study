@@ -19,7 +19,7 @@ const redirect = async (req, res, next) => {
 const allLinks = async (req, res) => {
   try {
     let links = await Link.find();
-    res.send(links);
+    res.render('all', { links });
   } catch (err) {
     res.send(err);
   }
