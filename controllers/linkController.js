@@ -36,8 +36,21 @@ const addLink = async (req, res) => {
   }
 };
 
+const deleteLink = async (req, res) => {
+  let id = req.params.id;
+  if (!id) {
+    id = req.body.id;
+  }
+
+  try {
+    res.send(await Link.findByIdAndDelete(id));
+  } catch (err) {
+    res.send(err);
+  }
+};
+
 function capitalize(str) {
   return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
-module.exports = { redirect, addLink, allLinks };
+module.exports = { redirect, addLink, allLinks, deleteLink };
