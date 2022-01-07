@@ -5,20 +5,31 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <link rel="stylesheet" href="../public/styles/all.css" />
   </head>
   <body>
     <h1>All Links</h1>
     <% for(i= 0; i < links.length; i++){ %>
-    <div id="<%= links[i]._id%>">
-      <h2><%= links[i].title%></h2>
-      <p><%= links[i].description%></p>
-      <p><%=links[i].url%></p>
-      <button onclick="deleteLink('<%=links[i]._id%>')">Delete</button>
-      <a href="/links/edit/<%= links[i]._id%>">Edit</a>
+    <div class="container" id="<%= links[i]._id%>">
+      <div>
+        <h2 class="text"><%= links[i].title%></h2>
+        <p class="text"><%= links[i].description%></p>
+        <p class="text"><%=links[i].url%></p>
+        <p class="text">
+          Essa página teve um total de
+          <strong style="color: rgb(255, 201, 120)"><%=links[i].click%></strong>
+          clicks.
+        </p>
+      </div>
+      <div class="buttons">
+        <button onclick="deleteLink('<%=links[i]._id%>')">Delete</button>
+        <a href="/links/edit/<%= links[i]._id%>">Edit</a>
+        <button onclick="copyLink('<%= links[i].title%>')">Copy</button>
+      </div>
     </div>
     <% } %>
 
-    <a href="/links/add">Adicionar</a>
+    <a href="/links/add" class="addBtn">Add</a>
 
     <script>
       function deleteLink(id) {
@@ -37,6 +48,17 @@
             });
           }
         });
+      }
+      function copyLink(link) {
+        let linkCopy = link.replace(/\s+/g, '-');
+        value = `192.168.0.10:3000/links/${linkCopy}`;
+        var tempInput = document.createElement('input');
+        tempInput.style = 'position: absolute; left: -1000px; top: -1000px';
+        tempInput.value = value;
+        document.body.appendChild(tempInput);
+        tempInput.select();
+        document.execCommand('copy');
+        document.body.removeChild(tempInput);
       }
     </script>
   </body>
