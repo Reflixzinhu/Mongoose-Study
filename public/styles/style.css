@@ -1,3 +1,102 @@
+:root {
+  --background: #12171d;
+  --containerBackground: #1f2933;
+  --titleColor: #fafafa;
+  --textColor: #cbd2d9;
+  --subColor: #ffc978;
+}
+* {
+  margin: 0 0 0 0;
+  padding: 0 0 0 0;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap');
+
 body {
-  background-color: black;
+  background-color: var(--background);
+  color: var(--titleColor);
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  margin: 1rem;
+}
+p {
+  color: var(--textColor);
+  font-family: 'Roboto', sans-serif;
+}
+h1 {
+  font-weight: 700;
+}
+
+.container {
+  padding: 1rem;
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: space-between;
+  background-color: var(--containerBackground);
+  border-radius: 1rem;
+  align-items: center;
+  width: fit-content;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+button,
+a {
+  padding: 0 0 0 0;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 700;
+  border: none;
+  background-color: var(--subColor);
+  color: #12171d;
+  width: 4rem;
+  padding: 0.3rem 0 0.3rem 0;
+  border-radius: 1rem;
+  text-decoration: none;
+  font-size: 1rem;
+  display: inline-block;
+  text-align: center;
+  transition: 200ms;
+  cursor: pointer;
+}
+
+button:hover,
+a:hover {
+  background-color: var(--background);
+  color: var(--subColor);
+}
+
+input {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 700;
+  width: 16rem;
+  border: none;
+  padding: 0.3rem 1rem 0.3rem 1rem;
+  border-radius: 1rem;
+}
+
+/* ===== Scrollbar CSS ===== */
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--subColor) var(--background);
+}
+
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 0.8rem;
+}
+
+*::-webkit-scrollbar-track {
+  background: var(--background);
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: var(--subColor);
+  border-radius: 1rem;
+  border: 0.1875rem solid var(--background);
 }

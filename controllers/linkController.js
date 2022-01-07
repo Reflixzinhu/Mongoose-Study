@@ -4,6 +4,10 @@ const Link = require('../models/Link');
 const redirect = async (req, res, next) => {
   let titleWithoutCapitalize = req.params.title;
   let title = capitalize(titleWithoutCapitalize);
+  if (title.includes('-')) {
+    title = title.replace(/-/g, ' ');
+  }
+  console.log(title);
   try {
     let doc = await Link.findOne({ title });
     if (doc) {
