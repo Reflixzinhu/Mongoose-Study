@@ -18,8 +18,8 @@ const redirect = async (req, res, next) => {
 
 const allLinks = async (req, res) => {
   try {
-    let links = await Link.find();
-    res.render('all', { links });
+    let docs = await Link.find();
+    res.render('all', { links: docs });
   } catch (err) {
     res.send(err);
   }
@@ -30,7 +30,7 @@ const addLink = async (req, res) => {
 
   try {
     let doc = await link.save();
-    res.send('Link Adicionado com Sucesso!');
+    res.redirect('/links/all');
   } catch (err) {
     res.render('add', { err, body: req.body });
   }
@@ -50,8 +50,44 @@ const deleteLink = async (req, res) => {
   }
 };
 
+const loadLink = async (req, res) => {
+  let id = req.params.id;
+  try {
+    let doc = await Link.findById(id);
+    res.render('edit', { err: false, body: doc });
+  } catch (err) {
+    res.status(404).send(err);
+  }
+};
+
+const editLink = async (req, res) => {
+  let link = {};
+  link.title = req.body.title;
+  link.description = req.body.description;
+  link.url = req.body.url;
+
+  let id = req.params.id;
+  if (!id) {
+    id = req.body.id;
+  }
+
+  try {
+    let doc = await Link.findByIdAndUpdate(id, link);
+    res.redirect('/links/all');
+  } catch (err) {
+    res.render('edit', { err, body: req.body });
+  }
+};
+
 function capitalize(str) {
   return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
-module.exports = { redirect, addLink, allLinks, deleteLink };
+module.exports = {
+  redirect,
+  addLink,
+  allLinks,
+  deleteLink,
+  loadLink,
+  editLink,
+};
