@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>All Links</h1>
+    <% for(i= 0; i < links.length; i++){ %>
+    <div id="<%= links[i]._id%>">
+      <h2><%= links[i].title%></h2>
+      <p><%= links[i].description%></p>
+      <p><%=links[i].url%></p>
+      <button onclick="deleteLink('<%=links[i]._id%>')">Delete</button>
+      <a href="/links/edit/<%= links[i]._id%>">Edit</a>
+    </div>
+    <% } %>
+
+    <a href="/links/add">Adicionar</a>
+
+    <script>
+      function deleteLink(id) {
+        fetch('/links/' + id, { method: 'DELETE' }).then((res) => {
+          if (res.status == 200) {
+            res.text().then((linkId) => {
+              console.log(linkId);
+              document.getElementById(linkId).remove();
+            });
+          } else {
+            res.json().then((err) => {
+              console.log(err.message);
+              alert(
+                `Não foi possível encontrar o ID:"${err.value}", Por favor, entre em contato com os desenvolvedores do Site.`
+              );
+            });
+          }
+        });
+      }
+    </script>
+  </body>
+</html>
