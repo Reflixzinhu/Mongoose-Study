@@ -35,6 +35,7 @@ h1 {
   background-color: var(--containerBackground);
   border-radius: 1rem;
   align-items: center;
+  width: 65%;
 }
 
 .text {
