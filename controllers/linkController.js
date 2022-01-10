@@ -9,7 +9,7 @@ const redirect = async (req, res, next) => {
   }
   console.log(title);
   try {
-    let doc = await Link.findOne({ title });
+    let doc = await Link.findOneAndUpdate({ title }, { $inc: { click: 1 } });
     if (doc) {
       res.redirect(doc.url);
     } else {
